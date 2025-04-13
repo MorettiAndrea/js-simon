@@ -4,7 +4,12 @@ const countdown = document.getElementById("countdown");
 const instructions = document.getElementById("instructions");
 const numbersList = document.getElementById("numbers-list");
 const answersForm = document.getElementById("answers-form");
+// elementi lista
 let listElement;
+
+// elementi timer
+let timeLeftMs = 3000;
+let countdownIntervalId;
 // funzione numeri casuali
 
 function fromRandomToArray() {
@@ -14,19 +19,22 @@ function fromRandomToArray() {
   for (let i = 0; i < 5; i++) {
     let randomNumbers = Math.floor(Math.random() * 50) + 1;
     randomArray.push(randomNumbers);
-    listElement = document.createElement("li");
-    listElement.appendChild(document.createTextNode(randomArray[i]));
-    numbersList.appendChild(listElement);
-    return numbersList;
+    randomArray.forEach(() => {
+      listElement = document.createElement("li");
+      listElement.appendChild(document.createTextNode(randomArray[i]));
+      numbersList.appendChild(listElement);
+      if (timeLeftMs <= 0) {
+        listElement.style.display = "none";
+        numbersList.style.display = "none";
+      }
+      return numbersList;
+    });
   }
+  console.log(randomArray);
 }
-
 console.log(fromRandomToArray());
 
 // creazione timer
-
-let timeLeftMs = 3000;
-let countdownIntervalId;
 
 // condizioni fine countdown
 const timeIsOver = () => {
