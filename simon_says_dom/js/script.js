@@ -22,8 +22,28 @@ const timeIsOver = () => {
   countdown.style.display = "none";
   instructions.style.display = "none";
   answersForm.classList.remove("d-none");
-  listElement.style.display = "none";
+numbersList.classList.add("d-none");
   clearInterval(clock);
 };
 
-// da riprendere per aiuto video tiziano da 20:21
+let generatedNumbers = []
+
+const randomNumbersGenerator = (min,max)=>{
+  const rng = Math.floor(Math.random() *(max-min+1)+min)
+  return rng
+}
+
+
+  for (let i = 0; generatedNumbers.length < 5;){
+    
+    const randomNumber = randomNumbersGenerator(1,10);
+    if(!generatedNumbers.includes(randomNumber))
+   { generatedNumbers.push(randomNumber);
+  i++}
+   }
+
+   console.log(generatedNumbers);
+
+   const numbersIntoList = generatedNumbers.map((randomNumber)=>`<li>${randomNumber}</li>`)
+   
+   numbersList.innerHTML = numbersIntoList.join("")
